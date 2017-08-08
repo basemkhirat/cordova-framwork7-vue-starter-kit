@@ -1,6 +1,5 @@
 import Vue from 'vue';
 
-
 export default {
 
     state: {
@@ -30,8 +29,7 @@ export default {
             }
 
             if (Date.now() > state.expiration) {
-               /// alert("2");
-                //return false;
+                return false;
             }
 
             return true;
@@ -100,13 +98,7 @@ export default {
                     store.commit("login", response.body);
                 }
             });
-        },
-
-
-        logout: function () {
-            console.log(Vue.$f7);
         }
-
     }
 
 }

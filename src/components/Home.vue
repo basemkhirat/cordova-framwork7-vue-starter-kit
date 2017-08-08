@@ -70,7 +70,6 @@
 
     export default {
 
-
         computed: {
             user: function () {
                 return this.$store.getters.user;
@@ -79,45 +78,35 @@
 
         methods: {
 
-            check: function () {
-
-                this.$http.get('post').then(function (response) {
-                    alert("ok");
-                });
-
-            },
-
             onF7Init: function () {
 
-//                console.log(this.user);
-//
-//                console.log("Home init");
+                console.log("Home init");
 
                 const base = this;
 
-//                console.log(base.$device);
-//
-//                console.log(base.$$);
-//
-//                console.log(base.$theme);
-//
-//                console.log(base.$f7);
+                // console.log(base.$device);
+
+                // console.log(base.$$);
+
+                console.log(base.$theme);
+
+                console.log(base.$f7);
 
                 Vue.cordova.on('deviceready', function () {
 
-                    //navigator.vibrate(2000);
+                    // navigator.vibrate(2000);
 
                     navigator.geolocation.getCurrentPosition(function (position) {
-                        base.$f7.alert('Latitude: ' + position.coords.latitude + '\n' +
+                        /* base.$f7.alert('Latitude: ' + position.coords.latitude + '\n' +
                             'Longitude: ' + position.coords.longitude + '\n' +
                             'Altitude: ' + position.coords.altitude + '\n' +
                             'Accuracy: ' + position.coords.accuracy + '\n' +
                             'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' +
                             'Heading: ' + position.coords.heading + '\n' +
                             'Speed: ' + position.coords.speed + '\n' +
-                            'Timestamp: ' + position.timestamp + '\n');
+                            'Timestamp: ' + position.timestamp + '\n'); */
                     }, function (error) {
-                        //base.$f7.alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
+                        // base.$f7.alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
                     });
 
                     /*base.$f7.addNotification({
@@ -135,7 +124,6 @@
                 });
 
             },
-
 
             logout: function () {
 
