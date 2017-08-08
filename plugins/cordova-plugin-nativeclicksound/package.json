@@ -1,0 +1,114 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "cordova-plugin-nativeclicksound",
+        "scope": null,
+        "escapedName": "cordova-plugin-nativeclicksound",
+        "name": "cordova-plugin-nativeclicksound",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/Users/basemkhirat/www/template/node_modules"
+    ]
+  ],
+  "_from": "cordova-plugin-nativeclicksound@latest",
+  "_id": "cordova-plugin-nativeclicksound@0.0.3",
+  "_inCache": true,
+  "_location": "/cordova-plugin-nativeclicksound",
+  "_nodeVersion": "4.1.2",
+  "_npmOperationalInternal": {
+    "host": "packages-9-west.internal.npmjs.com",
+    "tmp": "tmp/cordova-plugin-nativeclicksound-0.0.3.tgz_1456243737150_0.9927621302194893"
+  },
+  "_npmUser": {
+    "name": "matimenich",
+    "email": "matimenich@gmail.com"
+  },
+  "_npmVersion": "2.14.4",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "cordova-plugin-nativeclicksound",
+    "scope": null,
+    "escapedName": "cordova-plugin-nativeclicksound",
+    "name": "cordova-plugin-nativeclicksound",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-nativeclicksound/-/cordova-plugin-nativeclicksound-0.0.3.tgz",
+  "_shasum": "eac5f6fd8c303d5fd76fb9d7fd3715bce90a33c2",
+  "_shrinkwrap": null,
+  "_spec": "cordova-plugin-nativeclicksound",
+  "_where": "/Users/basemkhirat/www/template/node_modules",
+  "author": {
+    "name": "Matías Menich",
+    "email": "matimenich@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/MatiMenich/cordova-plugin-nativeClickSound/issues"
+  },
+  "cordova": {
+    "id": "cordova-plugin-nativeclicksound",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "dependencies": {},
+  "description": "Cordova plugin for getting native click sounds on android and ios",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "eac5f6fd8c303d5fd76fb9d7fd3715bce90a33c2",
+    "tarball": "https://registry.npmjs.org/cordova-plugin-nativeclicksound/-/cordova-plugin-nativeclicksound-0.0.3.tgz"
+  },
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "gitHead": "5cb816977b40ecc799d46dfea9439ae6021c8c80",
+  "homepage": "https://github.com/MatiMenich/cordova-plugin-nativeClickSound",
+  "keywords": [
+    "cordova",
+    "android",
+    "ios",
+    "native click",
+    "click",
+    "click sound",
+    "cordova plugin",
+    "download",
+    "install",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/MatiMenich/cordova-plugin-nativeClickSound/README.md"
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "matimenich",
+      "email": "matimenich@gmail.com"
+    }
+  ],
+  "name": "cordova-plugin-nativeclicksound",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MatiMenich/cordova-plugin-nativeClickSound.git"
+  },
+  "scripts": {},
+  "version": "0.0.3"
+}
