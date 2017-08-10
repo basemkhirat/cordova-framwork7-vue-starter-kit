@@ -126,8 +126,6 @@
 
                             // other responses
 
-                            alert("sdf");
-
                             self.$f7.addNotification({
                                 title: self.$t('login'),
                                 message: response.body.data ? response.body.data : self.$t("connection_error"),
