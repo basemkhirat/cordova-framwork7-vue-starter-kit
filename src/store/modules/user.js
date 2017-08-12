@@ -28,9 +28,9 @@ export default {
                 return false;
             }
 
-            if (Date.now() > state.expiration) {
-                return false;
-            }
+            //if (Date.now() > state.expiration) {
+            //    return false;
+            //}
 
             return true;
         }

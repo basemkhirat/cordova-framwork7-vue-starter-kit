@@ -12,7 +12,7 @@
                 <p>
                     <a class="button button-fill" href="/settings">{{ $t("settings") }}</a>
                 </p>
-                <p v-for="value,key in this.user">
+                <p v-for="(value,key) in this.user">
                     {{ key }} :  {{ value }}
                 </p>
             </div>

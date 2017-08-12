@@ -151,6 +151,10 @@
 
             onF7Init: function () {
 
+
+                console.log(parseInt(localStorage.getItem("expiration")));
+                console.log(Date.now());
+
                 console.log("App init");
 
                 const base = this;

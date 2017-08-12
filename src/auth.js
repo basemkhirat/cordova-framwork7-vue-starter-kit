@@ -8,15 +8,15 @@ export default function (Vue) {
          */
         getToken() {
             let token = localStorage.getItem("token");
-            let expiration = localStorage.getItem("expiration");
+            let expiration = parseInt(localStorage.getItem("expiration"));
 
             if (!token || !expiration) {
                 return null;
             }
 
-            if (Date.now() > expiration) {
-                return null;
-            }
+            //if (Date.now() > expiration) {
+            //    return null;
+            //}
 
             return token;
         },
