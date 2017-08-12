@@ -13,22 +13,7 @@
         <f7-views>
             <f7-view url='/' :init="true" :dynamic-navbar="true" navbar-through main>
 
-                <div class="navbar" v-if="$theme.ios">
-                    <div class="navbar-inner">
-                        <div class="left">
-                            <a href="#" class="link icon-only open-panel" data-panel="left">
-                                <i class="icon icon-bars"></i>
-                            </a>
-                        </div>
-                        <div class="center">{{ $t("name") }}</div>
-                        <div class="right">
-                            <a v-if="$store.getters.auth" href="#" data-popover=".popover-user" class="link icon-only open-popover">
-                                {{ $store.getters.user.first_name }} &nbsp;
-                                <i class="f7-icons">person</i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <navbar v-if="$theme.ios"></navbar>
 
                 <f7-pages></f7-pages>
 
@@ -178,7 +163,9 @@
 
         },
 
-        components: {}
+        components: {
+            navbar: require("./Navbar.vue")
+        }
 
     }
 
