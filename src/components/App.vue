@@ -27,7 +27,7 @@
             <div class="navbar">
                 <div class="navbar-inner">
                     <div class="left">
-                        <a href="#" class="link">Left Menu</a>
+                        <a href="#" class="link">{{ $t("left_menu") }}</a>
                     </div>
                 </div>
             </div>
@@ -110,7 +110,7 @@
             <div class="navbar">
                 <div class="navbar-inner">
                     <div class="left">
-                        <a href="#" class="link">Popup</a>
+                        <a href="#" class="link">{{ $t("popup") }}</a>
                     </div>
 
                     <div class="right close-popup">

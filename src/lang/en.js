@@ -25,6 +25,8 @@ export default {
     login_success: "You are logged in successfully",
     register_success: "You are logged up successfully",
     logout_success: "You are logged out successfully",
+    left_menu: "Left Menu",
+    popup: "Popup",
 
 
     messages: {
