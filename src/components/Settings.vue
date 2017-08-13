@@ -2,22 +2,7 @@
 
     <div class="page" data-page="settings">
 
-        <div class="navbar" v-if="$theme.ios">
-            <div class="navbar-inner">
-                <div class="left">
-                    <a href="#" class="link icon-only" @click="$router.back()">
-                        <i class="icon f7-icons" v-if="$store.getters.locale == 'en'">arrow-left</i>
-                        <i class="icon f7-icons" v-if="$store.getters.locale == 'ar'">arrow-right</i>
-                    </a>
-                </div>
-                <div class="center">
-                    {{ $t("settings") }}
-                </div>
-                <div class="right"></div>
-            </div>
-        </div>
-
-        <div class="navbar" v-if="$theme.material">
+        <div class="navbar">
             <div class="navbar-inner">
                 <div class="left">
                     <a href="#" class="link icon-only" @click="$router.back()">

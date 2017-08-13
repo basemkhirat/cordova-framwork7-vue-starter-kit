@@ -3,7 +3,7 @@
     <div class="navbar">
         <div class="navbar-inner">
             <div class="left">
-                <a href="#" class="link open-panel"
+                <a href="#" class="link icon-only open-panel"
                    :data-panel="{'left': $store.getters.locale == 'en', 'right': $store.getters.locale == 'ar'}">
                     <i class="icon icon-bars"></i>
                 </a>
