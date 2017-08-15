@@ -6,12 +6,12 @@
             <div class="navbar-inner">
                 <div class="left">
                     <a href="#" class="link icon-only" @click="$router.back()">
-                        <i class="icon f7-icons" v-if="locale == 'en'">arrow-left</i>
-                        <i class="icon f7-icons" v-if="locale == 'ar'">arrow-right</i>
+                        <i class="icon f7-icons" v-if="$store.getters.locale == 'en'">arrow-left</i>
+                        <i class="icon f7-icons" v-if="$store.getters.locale == 'ar'">arrow-right</i>
                     </a>
                 </div>
                 <div class="center">
-                    {{ $t("settings") }}
+                    {{ $app.trans("settings") }}
                 </div>
                 <div class="right"></div>
             </div>
@@ -20,23 +20,23 @@
         <div class="page-content">
             <div class="content-block">
 
-                <div class="content-block-title">{{ $t("general_settings") }}</div>
+                <div class="content-block-title">{{ $app.trans("general_settings") }}</div>
 
                 <div class="list-block">
 
                     <ul>
                         <li>
                             <a href="#" class="item-link smart-select" data-open-in="picker"
-                               :data-back-text="$t('back')">
+                               :data-back-text="$app.trans('back')">
 
-                                <select v-model="locale" @change="setLocale($event.target.value)">
+                                <select v-model="$store.getters.locale" @change="setLocale($event.target.value)">
                                     <option value="en" selected>English</option>
                                     <option value="ar">Arabic</option>
                                 </select>
 
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title">{{ $t("language") }}</div>
+                                        <div class="item-title">{{ $app.trans("language") }}</div>
                                     </div>
                                 </div>
 
@@ -58,17 +58,14 @@
 
     export default {
 
-        data: function () {
-
-            return {
-                locale: this.$store.getters.locale
-            }
-
-        },
 
         methods: {
 
             onF7Init: function () {
+
+
+                console.log(this.$app);
+
                 console.log("Settings init")
             },
 
@@ -82,10 +79,17 @@
                     self.$f7.hideIndicator();
                     self.$store.commit("locale", locale);
 
-                    window.location.reload();
+
+                    self.$app.route("/");
+
+                    //self.$f7.mainView.router.reloadPage("/");
 
                 }, 3000);
             },
+
+            trans: function (key) {
+                return this.$app.trans(key, this.$store.getters.locale);
+            }
 
 
         }

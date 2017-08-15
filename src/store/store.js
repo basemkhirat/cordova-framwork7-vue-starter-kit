@@ -11,6 +11,9 @@ const state = {
 const getters = {
     locale: function (state) {
         return state.locale;
+    },
+    direction: function (state) {
+        return state.locale == "ar" ? "rtl" : "ltr";
     }
 };
 
@@ -18,6 +21,7 @@ const mutations = {
     locale: function (state, locale) {
         state.locale = locale;
         localStorage.setItem("locale", locale);
+
     }
 };
 

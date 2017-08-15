@@ -3,7 +3,7 @@ import Vue from 'vue';
 export default {
 
     state: {
-        user:  JSON.parse(localStorage.getItem("user")) || {},
+        user: JSON.parse(localStorage.getItem("user")) || {},
         token: localStorage.getItem("token") || null,
         expiration: localStorage.getItem("expiration") || 0
     },
@@ -76,7 +76,7 @@ export default {
             };
 
             return Vue.http.post("auth", params).then(function (response) {
-                if(response.body.status) {
+                if (response.body.status) {
                     store.commit("login", response.body);
                 }
             });
@@ -94,7 +94,7 @@ export default {
             };
 
             return Vue.http.post("user", params).then(function (response) {
-                if(response.body.status){
+                if (response.body.status) {
                     store.commit("login", response.body);
                 }
             });

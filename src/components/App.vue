@@ -10,7 +10,8 @@
 
         <!-- Main App -->
 
-        <f7-views>
+
+        <div class="views">
             <f7-view url='/' :init="true" :dynamic-navbar="true" navbar-through main>
 
                 <navbar v-if="$theme.ios"></navbar>
@@ -18,16 +19,16 @@
                 <f7-pages></f7-pages>
 
             </f7-view>
-        </f7-views>
+        </div>
 
         <!-- Left panel -->
 
-        <div class="panel panel-reveal navbar-fixed" :class="{'panel-left': $store.getters.locale == 'en', 'panel-right': $store.getters.locale == 'ar'}">
+        <div class="panel panel-reveal navbar-fixed" :class="{'panel-left': $app.isLTR(), 'panel-right': $app.isRTL()}">
 
             <div class="navbar">
                 <div class="navbar-inner">
                     <div class="left">
-                        <a href="#" class="link">{{ $t("left_menu") }}</a>
+                        <a href="#" class="link">{{ $app.trans("left_menu") }}</a>
                     </div>
                 </div>
             </div>
@@ -46,7 +47,7 @@
                                         <div class="item-media"><i class="f7-icons">home</i></div>
                                         <div class="item-inner">
                                             <div class="item-title">
-                                                {{ $t("news_feed") }}
+                                                {{ $app.trans("news_feed") }}
                                             </div>
                                             <div class="item-after"><span class="badge">5</span></div>
                                         </div>
@@ -60,33 +61,33 @@
                                         <div class="item-media"><i class="f7-icons">settings</i></div>
                                         <div class="item-inner">
                                             <div class="item-title">
-                                                {{ $t("settings") }}
+                                                {{ $app.trans("settings") }}
                                             </div>
                                         </div>
                                     </div>
                                 </a>
                             </li>
 
-                            <li v-if="!$store.getters.auth">
+                            <li v-if="!$app.auth.check()">
                                 <a href="/login" class="item-link close-panel" data-view=".view-main">
                                     <div class="item-content">
                                         <div class="item-media"><i class="f7-icons">person</i></div>
                                         <div class="item-inner">
                                             <div class="item-title">
-                                                {{ $t("login") }}
+                                                {{ $app.trans("login") }}
                                             </div>
                                         </div>
                                     </div>
                                 </a>
                             </li>
 
-                            <li v-if="$store.getters.auth">
+                            <li v-if="$app.auth.check()">
                                 <a href="/logout" class="item-link close-panel" @click="$store.commit('logout')">
                                     <div class="item-content">
                                         <div class="item-media"><i class="f7-icons">person</i></div>
                                         <div class="item-inner">
                                             <div class="item-title">
-                                                {{ $t("logout") }}
+                                                {{ $app.trans("logout") }}
                                             </div>
                                         </div>
                                     </div>
@@ -110,12 +111,12 @@
             <div class="navbar">
                 <div class="navbar-inner">
                     <div class="left">
-                        <a href="#" class="link">{{ $t("popup") }}</a>
+                        <a href="#" class="link">{{ $app.trans("popup") }}</a>
                     </div>
 
                     <div class="right close-popup">
                         <a href="#" class="link close-popup">
-                            {{ $t("close") }}
+                            {{ $app.trans("close") }}
                         </a>
                     </div>
                 </div>
@@ -147,13 +148,22 @@
 
     export default {
 
+
+        created: function () {
+            console.log("--");
+
+        },
+
         methods: {
 
             onF7Init: function () {
 
+                this.$app.f7.addNotification({message: "dsf"});
+                console.log("start");
 
-                console.log(parseInt(localStorage.getItem("expiration")));
-                console.log(Date.now());
+                console.log(this.$app.auth);
+
+                console.log("end");
 
                 console.log("App init");
 

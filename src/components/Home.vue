@@ -2,19 +2,27 @@
 
     <div class="page" data-page="home">
 
-        <navbar v-if="$theme.material"></navbar>
+        <navbar></navbar>
 
         <div class="page-content">
             <div class="content-block">
                 <p>
-                    <a class="button button-fill open-popup" data-popup="#popup">{{ $t("open_popup") }}</a>
+                    <a class="button button-fill open-popup" data-popup="#popup">{{ $app.trans("open_popup") }}</a>
                 </p>
                 <p>
-                    <a class="button button-fill" href="/settings">{{ $t("settings") }}</a>
+                    <a class="button button-fill" href="/settings">{{ $app.trans("settings") }}</a>
                 </p>
+
+                {{ $app.auth.user("email") }}
+                {{ $app.direction() }}
+                {{ $app.locale() }}
+
+                <p v-if="$app.auth.check()"> You are logged in</p>
+
                 <p v-for="(value,key) in this.user">
                     {{ key }} :  {{ value }}
                 </p>
+
             </div>
         </div>
 
@@ -33,9 +41,9 @@
             <div class="popover-inner">
                 <div class="list-block">
                     <ul>
-                        <li><a href="#" class="list-button item-link">{{ $t("profile") }}</a></li>
+                        <li><a href="#" class="list-button item-link">{{ $app.trans("profile") }}</a></li>
                         <li><a href="#" class="list-button close-popover item-link"
-                               @click="logout">{{ $t("logout") }}</a></li>
+                               @click="logout">{{ $app.trans("logout") }}</a></li>
                     </ul>
                 </div>
             </div>
@@ -54,7 +62,7 @@
 
         computed: {
             user: function () {
-                return this.$store.getters.user;
+                return this.$app.auth.user();
             }
         },
 
@@ -116,14 +124,14 @@
                 self.$store.commit('logout');
 
                 self.$f7.addNotification({
-                    title: self.$t('logout'),
-                    message: self.$t('logout_success'),
+                    title: self.$app.trans('logout'),
+                    message: self.$app.trans('logout_success'),
                     hold: 2500
                 });
 
                 setTimeout(function () {
                     self.$f7.hideIndicator();
-                    window.location.href = "/";
+                    self.$f7.mainView.router.reloadPage("/");
                 }, 3000);
 
             }
