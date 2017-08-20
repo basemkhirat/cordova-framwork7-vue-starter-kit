@@ -1,32 +1,22 @@
 <template>
 
-    <div class="page" data-page="home">
+    <div class="page toolbar-fixed homepage" data-page="home">
 
         <navbar></navbar>
 
-        <div class="page-content">
+        <div class="page-content pull-to-refresh-content">
+
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+
             <div class="content-block">
-                <p>
-                    <a class="button button-fill open-popup" data-popup="#popup">{{ $app.trans("open_popup") }}</a>
-                </p>
-                <p>
-                    <a class="button button-fill" href="/settings">{{ $app.trans("settings") }}</a>
-                </p>
-
-                {{ $app.auth.user("email") }}
-                {{ $app.direction() }}
-                {{ $app.locale() }}
-
-                <p v-if="$app.auth.check()"> You are logged in</p>
-
-                <p v-for="(value,key) in this.user">
-                    {{ key }} :  {{ value }}
-                </p>
-
+                <card v-for="post in posts" :post="post" :key="post.id" @liked="posts.filter(function(row){ return row.id == post.id})[0].isLiked = true"></card>
             </div>
         </div>
 
-        <div class="toolbar toolbar-bottom toolbar-fixed">
+        <div class="toolbar toolbar-bottom ">
             <div class="toolbar-inner">
                 <a href="#" class="link">1</a>
                 <a href="#" class="link">2</a>
@@ -35,19 +25,6 @@
             </div>
         </div>
 
-        <!-- Links popover -->
-        <div class="popover popover-user popover-on-bottom">
-            <div class="popover-angle"></div>
-            <div class="popover-inner">
-                <div class="list-block">
-                    <ul>
-                        <li><a href="#" class="list-button item-link">{{ $app.trans("profile") }}</a></li>
-                        <li><a href="#" class="list-button close-popover item-link"
-                               @click="logout">{{ $app.trans("logout") }}</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
 
     </div>
 
@@ -60,88 +37,117 @@
 
     export default {
 
+
         computed: {
-            user: function () {
-                return this.$app.auth.user();
+
+            posts: function () {
+                return this.$store.getters.posts;
             }
+
         },
+
+        data: function () {
+            return {};
+        },
+
+        mounted: function () {
+
+            console.log("home");
+
+
+
+
+            /*const self = this;
+
+            self.$app.on("cordova", function (app) {
+                app.f7.alert("cordova loaded");
+            });
+
+            self.$app.load(function (app) {
+
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    app.f7.alert('Latitude: ' + position.coords.latitude + '\n' +
+                        'Longitude: ' + position.coords.longitude + '\n' +
+                        'Altitude: ' + position.coords.altitude + '\n' +
+                        'Accuracy: ' + position.coords.accuracy + '\n' +
+                        'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' +
+                        'Heading: ' + position.coords.heading + '\n' +
+                        'Speed: ' + position.coords.speed + '\n' +
+                        'Timestamp: ' + position.timestamp + '\n');
+                }, function (error) {
+                    app.f7.alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
+                });
+
+                app.f7.addNotification({
+                    title: 'Cordova',
+                    message: 'Device is ready !',
+                    button: {
+                        text: 'Close Me',
+                        color: 'lightgreen'
+                    },
+                    onClose: function () {
+                        app.f7.alert('Device : ' + app.cordova.device.manufacturer + ' ' + app.cordova.device.platform + ' ' + app.cordova.device.version)
+                    }
+                });
+
+                app.f7.alert("hhahahah");
+
+
+            });*/
+        },
+
 
         methods: {
 
             onF7Init: function () {
 
-                console.log("Home init");
+                const self = this;
 
-                const base = this;
+                self.getPosts();
 
-                // console.log(base.$device);
+                // pull to reload event
 
-                // console.log(base.$$);
-
-                console.log(base.$theme);
-
-                console.log(base.$f7);
-
-                Vue.cordova.on('deviceready', function () {
-
-                    // navigator.vibrate(2000);
-
-                    navigator.geolocation.getCurrentPosition(function (position) {
-                        /* base.$f7.alert('Latitude: ' + position.coords.latitude + '\n' +
-                            'Longitude: ' + position.coords.longitude + '\n' +
-                            'Altitude: ' + position.coords.altitude + '\n' +
-                            'Accuracy: ' + position.coords.accuracy + '\n' +
-                            'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' +
-                            'Heading: ' + position.coords.heading + '\n' +
-                            'Speed: ' + position.coords.speed + '\n' +
-                            'Timestamp: ' + position.timestamp + '\n'); */
-                    }, function (error) {
-                        // base.$f7.alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
-                    });
-
-                    /*base.$f7.addNotification({
-                        title: 'Cordova',
-                        message: 'Device is ready !',
-                        button: {
-                            text: 'Close Me',
-                            color: 'lightgreen'
-                        },
-                        onClose: function () {
-                            base.$f7.alert('Device : ' + Vue.cordova.device.manufacturer + ' ' + Vue.cordova.device.platform + ' ' + Vue.cordova.device.version)
-                        }
-                    });*/
-
+                self.$$('.pull-to-refresh-content').on("ptr:refresh", function () {
+                    self.getPosts();
                 });
 
             },
 
-            logout: function () {
+            getPosts: function(){
 
                 const self = this;
 
-                self.$f7.showIndicator();
+                self.$store.dispatch("posts").then(function (response) {
 
-                self.$store.commit('logout');
+                    // success response
 
-                self.$f7.addNotification({
-                    title: self.$app.trans('logout'),
-                    message: self.$app.trans('logout_success'),
-                    hold: 2500
+                    self.$f7.pullToRefreshDone();
+                    self.$f7.initImagesLazyLoad(".homepage");
+
+                }, function (response) {
+
+                    // other responses
+
+                    self.$f7.pullToRefreshDone();
+
+                    self.$f7.addNotification({
+                        title: self.$app.trans('login'),
+                        message: response.body.data ? response.body.data : self.$app.trans("connection_error"),
+                        hold: 8000
+                    });
                 });
-
-                setTimeout(function () {
-                    self.$f7.hideIndicator();
-                    self.$f7.mainView.router.reloadPage("/");
-                }, 3000);
 
             }
 
         },
 
         components: {
-            navbar: require("./Navbar.vue")
+            navbar: require("./partials/Navbar.vue"),
+            card: require("./partials/Card.vue")
         }
 
     }
 
 </script>
+
+

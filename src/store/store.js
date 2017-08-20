@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import User from './modules/user';
+import Post from './modules/post';
 
 Vue.use(Vuex);
 
@@ -33,6 +34,7 @@ export const store = new Vuex.Store({
     mutations,
     actions,
     modules: [
-        User
+        User,
+        Post
     ]
 });

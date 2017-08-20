@@ -39,7 +39,8 @@
                                 <div class="item-inner">
                                     <div class="item-title label">{{ $app.trans('password') }}</div>
                                     <div class="item-input">
-                                        <input type="password" autocomplete="off" name="password" v-validate="'required|min:10'"
+                                        <input type="password" autocomplete="off" name="password"
+                                               v-validate="'required|min:10'"
                                                v-model="user.password" :placeholder="$app.trans('password')">
                                     </div>
                                 </div>
@@ -74,6 +75,7 @@
 
     export default {
 
+
         data: function () {
             return {
                 user: {
@@ -87,18 +89,18 @@
         methods: {
 
             onF7Init: function () {
-                console.log("Login init")
+
             },
 
             login: function () {
 
                 const self = this;
 
-                self.$f7.showIndicator();
+                self.$f7.showPreloader(this.$app.trans("please_wait"));
 
                 self.submitted = true;
 
-                self.$validator.validateAll(this.user).then(function (valid) {
+                self.$validator.validateAll().then(function (valid) {
 
                     if (valid) {
 
@@ -112,11 +114,7 @@
                                 hold: 2500
                             });
 
-                            self.$f7.showIndicator();
-
-                            setTimeout(function () {
-                                self.$app.route("/");
-                            }, 3000);
+                            self.$app.router.load("/");
 
                         }, function (response) {
 
@@ -130,7 +128,7 @@
 
                         }).then(function (response) {
                             self.submitted = false;
-                            self.$f7.hideIndicator();
+                            self.$f7.hidePreloader();
                         });
 
                     } else {
@@ -144,7 +142,7 @@
                         });
 
                         self.submitted = false;
-                        self.$f7.hideIndicator();
+                        self.$f7.hidePreloader();
                     }
 
 

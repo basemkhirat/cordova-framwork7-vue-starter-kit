@@ -5,9 +5,9 @@
         <div class="navbar">
             <div class="navbar-inner">
                 <div class="left">
-                    <a href="#" class="link icon-only" @click="$router.back()">
-                        <i class="icon f7-icons" v-if="$store.getters.locale == 'en'">arrow-left</i>
-                        <i class="icon f7-icons" v-if="$store.getters.locale == 'ar'">arrow-right</i>
+                    <a href="#" class="link icon-only" @click="$app.router.back()">
+                        <i class="icon f7-icons" v-if="$app.locale() == 'en'">arrow-left</i>
+                        <i class="icon f7-icons" v-if="$app.locale() == 'ar'">arrow-right</i>
                     </a>
                 </div>
                 <div class="center">
@@ -18,6 +18,7 @@
         </div>
 
         <div class="page-content">
+
             <div class="content-block">
 
                 <div class="content-block-title">{{ $app.trans("general_settings") }}</div>
@@ -27,11 +28,11 @@
                     <ul>
                         <li>
                             <a href="#" class="item-link smart-select" data-open-in="picker"
-                               :data-back-text="$app.trans('back')">
+                               :data-back-text="$app.trans('back')" data-back-on-select="true">
 
-                                <select v-model="$store.getters.locale" @change="setLocale($event.target.value)">
-                                    <option value="en" selected>English</option>
-                                    <option value="ar">Arabic</option>
+                                <select v-model="locale" @change="setLocale($event.target.value)">
+                                    <option value="en" :selected="locale == 'en'">English</option>
+                                    <option value="ar" :selected="locale == 'ar'">Arabic</option>
                                 </select>
 
                                 <div class="item-content">
@@ -48,8 +49,14 @@
             </div>
         </div>
 
-    </div>
+        <div class="toolbar toolbar-bottom toolbar-fixed">
+            <div class="toolbar-inner">
+                <a href="#" class="link">1</a>
+                <a href="#" class="link">2</a>
+            </div>
+        </div>
 
+    </div>
 
 </template>
 
@@ -58,15 +65,26 @@
 
     export default {
 
+        computed:  {
+
+            locale: {
+
+                get : function () {
+                    return this.$app.locale()
+                },
+
+                set: function (locale) {
+                    this.$store.commit("locale", locale)
+                }
+            }
+
+        },
+
 
         methods: {
 
             onF7Init: function () {
 
-
-                console.log(this.$app);
-
-                console.log("Settings init")
             },
 
             setLocale(locale) {
@@ -78,12 +96,7 @@
                 setTimeout(function () {
                     self.$f7.hideIndicator();
                     self.$store.commit("locale", locale);
-
-
-                    self.$app.route("/");
-
-                    //self.$f7.mainView.router.reloadPage("/");
-
+                    self.$app.router.load("/");
                 }, 3000);
             },
 

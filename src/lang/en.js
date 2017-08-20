@@ -1,6 +1,6 @@
 export default {
 
-    name: "App",
+    name: "Mehtara",
 
     login: "Login",
     register: "Register",
@@ -27,7 +27,10 @@ export default {
     logout_success: "You are logged out successfully",
     left_menu: "Left Menu",
     popup: "Popup",
-
+    cancel: "Cancel",
+    offline_message: "You are offline",
+    online_message: "You are online",
+    please_wait: "please wait ...",
 
     messages: {
         _default: function (e) {

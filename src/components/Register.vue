@@ -29,13 +29,15 @@
                                     <f7-grid>
 
                                         <f7-col>
-                                            <input name="first_name" autocomplete="off" v-validate="'required|alpha_num|min:2|max:20'"
+                                            <input name="first_name" autocomplete="off"
+                                                   v-validate="'required|alpha_num|min:2|max:20'"
                                                    v-model="user.first_name"
                                                    type="text" :placeholder="$app.trans('first_name')">
                                         </f7-col>
 
                                         <f7-col>
-                                            <input name="last_name" autocomplete="off" v-validate="'required|alpha_num|min:2|max:20'"
+                                            <input name="last_name" autocomplete="off"
+                                                   v-validate="'required|alpha_num|min:2|max:20'"
                                                    v-model="user.last_name"
                                                    type="text" :placeholder="$app.trans('last_name')">
                                         </f7-col>
@@ -55,7 +57,8 @@
                                 <div class="item-inner">
                                     <div class="item-title label">{{ $app.trans('email') }}</div>
                                     <div class="item-input">
-                                        <input name="email" autocomplete="off" v-validate="'required|email'" v-model="user.email"
+                                        <input name="email" autocomplete="off" v-validate="'required|email'"
+                                               v-model="user.email"
                                                type="text"
                                                :placeholder="$app.trans('email')">
                                     </div>
@@ -71,7 +74,8 @@
                                 <div class="item-inner">
                                     <div class="item-title label">{{ $app.trans('password') }}</div>
                                     <div class="item-input">
-                                        <input name="password" autocomplete="off" v-validate="'required|min:10'" v-model="user.password"
+                                        <input name="password" autocomplete="off" v-validate="'required|min:10'"
+                                               v-model="user.password"
                                                type="password" :placeholder="$app.trans('password')">
                                     </div>
                                 </div>
@@ -86,7 +90,8 @@
                                 <div class="item-inner">
                                     <div class="item-title label">{{ $app.trans('confirm_password') }}</div>
                                     <div class="item-input">
-                                        <input name="repassword" autocomplete="off" v-validate="'required|confirmed:password|min:10'"
+                                        <input name="repassword" autocomplete="off"
+                                               v-validate="'required|confirmed:password|min:10'"
                                                v-model="user.repassword"
                                                type="password" :placeholder="$app.trans('confirm_password')">
                                     </div>
@@ -124,6 +129,7 @@
 
     export default {
 
+
         data: function () {
             return {
                 user: {
@@ -139,15 +145,17 @@
 
         methods: {
 
+
             onF7Init: function () {
-                console.log("Login page init")
+
+
             },
 
             register: function () {
 
                 const self = this;
 
-                self.$f7.showIndicator();
+                self.$f7.showPreloader("loading...");
 
                 self.submitted = true;
 
@@ -165,11 +173,7 @@
                                 hold: 2500
                             });
 
-
-                            setTimeout(function () {
-                                self.$app.route("/");
-                            }, 3000);
-
+                            self.$app.router.load("/");
 
                         }, function (response) {
 
@@ -183,7 +187,7 @@
 
                         }).then(function (response) {
                             self.submitted = false;
-                            self.$f7.hideIndicator();
+                            self.$f7.hidePreloader();
                         });
 
                     } else {
@@ -199,7 +203,7 @@
                         });
 
                         self.submitted = false;
-                        self.$f7.hideIndicator();
+                        self.$f7.hidePreloader();
                     }
 
                 });

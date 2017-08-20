@@ -27,6 +27,10 @@ export default {
     logout_success: "تم تسجيل الخروج بنجاح",
     left_menu: "القائمة الجانبية",
     popup: "بوب اب",
+    cancel: "رجوع",
+    offline_message: "لا يوجد إتصال",
+    online_message: "يوجد إتصال",
+    please_wait: "يرجي الإنتظار ...",
 
     messages: {
         _default: function (n) {
